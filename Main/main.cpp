@@ -2,6 +2,11 @@
 
 int main() {
     Menu menu;
-    menu.manejarEntradaUsuario(); // Inicia el menú y maneja la entrada del usuario
+    menu.mostrarMenu();
+    while (true) {
+        menu.manejarEntradaUsuario();
+    }
     return 0;
 }
+
+// eof - main.cpp
