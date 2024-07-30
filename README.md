@@ -1,7 +1,7 @@
 # Proyecto de Manipulación de Mallas Poligonales
 
 ## Pontificia Universidad Javeriana
-### Departamento de Ingeniería de Sistemas
+### Estructuras de Datos
 
 ## Autores
 
