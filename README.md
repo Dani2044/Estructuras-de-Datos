@@ -2,7 +2,6 @@
 
 ## Pontificia Universidad Javeriana
 ### Departamento de Ingeniería de Sistemas
-### Curso: Estructuras de Datos, 2024-30
 
 ## Autores
 
