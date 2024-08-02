@@ -5,7 +5,7 @@
 
 class Objeto {
 private:
-    std::string mesh_name;
+    std::string nombre_objeto;
     int n_vertices;
     std::vector<int> x;
     std::vector<int> y;
@@ -15,12 +15,12 @@ private:
 
 public:
     // Constructor
-    Objeto(std::string mesh_name, int n_vertices, std::vector<int> x, std::vector<int> y, std::vector<int> z,
+    Objeto(std::string nombre_objeto, int n_vertices, std::vector<int> x, std::vector<int> y, std::vector<int> z,
            std::vector<int> cj, std::vector<int> ij)
-        : mesh_name(mesh_name), n_vertices(n_vertices), x(x), y(y), z(z), cj(cj), ij(ij) {}
+        : nombre_objeto(nombre_objeto), n_vertices(n_vertices), x(x), y(y), z(z), cj(cj), ij(ij) {}
 
     // Getters
-    std::string getMeshName() const { return mesh_name; }
+    std::string getNombreObjeto() const { return nombre_objeto; }
     int getNVertices() const { return n_vertices; }
     std::vector<int> getX() const { return x; }
     std::vector<int> getY() const { return y; }
@@ -29,7 +29,7 @@ public:
     std::vector<int> getIj() const { return ij; }
 
     // Setters
-    void setMeshName(const std::string& mesh_name) { this->mesh_name = mesh_name; }
+    void setNombreObjeto(const std::string& nombre_objeto) { this->nombre_objeto = nombre_objeto; }
     void setNVertices(int n_vertices) { this->n_vertices = n_vertices; }
     void setX(const std::vector<int>& x) { this->x = x; }
     void setY(const std::vector<int>& y) { this->y = y; }
@@ -46,7 +46,7 @@ public:
             totalAristas += num;
         }
     
-        oss << mesh_name << " contiene " << n_vertices << " vértices, ";
+        oss << nombre_objeto << " contiene " << n_vertices << " vértices, ";
         oss << totalAristas << " aristas y " << cj.size() << " caras.";
         return oss.str();
     }

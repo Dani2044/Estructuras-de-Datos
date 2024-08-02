@@ -123,7 +123,6 @@ void Menu::manejarEntradaUsuario() {
 
 // Muestra la información de ayuda
 void Menu::mostrarAyuda() {
-    // Falta implementación sin usar archivo (porque el profe dijo que no)
 }
 
 // Salir del programa
@@ -143,7 +142,7 @@ void Menu::cargarObjeto(const std::string& nombre_archivo) {
         return;
     }
 
-    std::string mesh_name;
+    std::string nombre_objeto;
     int n_vertices;
     std::vector<int> x, y, z;
     std::vector<int> cj;
@@ -153,8 +152,8 @@ void Menu::cargarObjeto(const std::string& nombre_archivo) {
 
     // Leer el nombre de la malla
     if (std::getline(file, line)) {
-        mesh_name = line;
-        std::cout << "Nombre de la malla: " << mesh_name << std::endl;
+        nombre_objeto = line;
+        std::cout << "Nombre de la malla: " << nombre_objeto << std::endl;
     } else {
         std::cout << "El archivo " << nombre_archivo << " no contiene un objeto 3D válido." << std::endl;
         return;
@@ -200,9 +199,9 @@ void Menu::cargarObjeto(const std::string& nombre_archivo) {
     }
 
     // Crear el objeto y añadirlo a la lista de objetos cargados
-    Objeto objeto(mesh_name, n_vertices, x, y, z, cj, ij);
+    Objeto objeto(nombre_objeto, n_vertices, x, y, z, cj, ij);
     objetosCargados.push_back(objeto);
-    std::cout << "El objeto " << mesh_name << " ha sido cargado exitosamente desde el archivo " << nombre_archivo << "." << std::endl;
+    std::cout << "El objeto " << nombre_objeto << " ha sido cargado exitosamente desde el archivo " << nombre_archivo << "." << std::endl;
 }
 
 // Lista los objetos cargados
@@ -243,7 +242,7 @@ void Menu::crearCajaDeAjusteGlobal() {
 void Menu::descargarObjeto(std::string& nombre_objeto) {
     // Buscar el objeto por nombre
   /*  auto it = std::find_if(objetosCargados.begin(), objetosCargados.end(),
-        [&nombre_objeto](const Objeto& obj) { return obj.getMeshName() == nombre_objeto; });
+        [&nombre_objeto](const Objeto& obj) { return obj.getNombreObjeto() == nombre_objeto; });
 
     if (it == objetosCargados.end()) {
         // Objeto no encontrado
@@ -262,7 +261,7 @@ void Menu::descargarObjeto(std::string& nombre_objeto) {
 void Menu::guardarObjetoEnArchivo( std::string& nombre_objeto,std::string& nombre_archivo) {
     // Buscar el objeto por nombre
     std::vector<Objeto>::iterator it = std::find_if(objetosCargados.begin(), objetosCargados.end(),
-        [&nombre_objeto](const Objeto& obj) { return obj.getMeshName() == nombre_objeto; });
+        [&nombre_objeto](const Objeto& obj) { return obj.getNombreObjeto() == nombre_objeto; });
 
     if (it == objetosCargados.end()) {
         // Objeto no encontrado
@@ -279,7 +278,7 @@ void Menu::guardarObjetoEnArchivo( std::string& nombre_objeto,std::string& nombr
         return;
     }
 
-    archivo << objeto.getMeshName() << std::endl;
+    archivo << objeto.getNombreObjeto() << std::endl;
     archivo << objeto.getX().size() << std::endl;
 
     // Escribir los vértices
