@@ -16,7 +16,6 @@ public:
     bool objetoCargado(std::string& nombre_objeto); // Verifica si un objeto está cargado
     void mostrarMenu(); // Muestra el menú
     void manejarEntradaUsuario(); // Maneja la entrada del usuario
-    void mostrarAyuda(); // Muestra la información de ayuda
     void salirPrograma(); // Salir del programa
     void cargarObjeto(const std::string& nombre_archivo); // Carga un objeto
     void listarObjetosCargados(); // Lista los objetos cargados
