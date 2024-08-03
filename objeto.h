@@ -54,3 +54,7 @@ public:
         return oss.str();
     }
 };
+
+#endif // __OBJETO_H__
+
+// eof - objeto.h
