@@ -2,6 +2,7 @@
 #define __MENU_H__
 
 #include "objeto.h"
+#include "envoltorio.h"
 #include <iostream>
 #include <string>
 #include <vector>
