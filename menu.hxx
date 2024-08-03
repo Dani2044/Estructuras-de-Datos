@@ -118,9 +118,8 @@ void Menu::manejarEntradaUsuario() {
             }
         } else {
             // No hay segundo argumento, muestra el menú general de ayuda
-            mostrarAyuda();
-        }
-        
+            mostrarMenu();
+        }        
     }  else if (comando == "cargar") { 
         std::string nombre_archivo;
         ss >> nombre_archivo;        
@@ -181,11 +180,9 @@ void Menu::salirPrograma() {
 // Carga un objeto
 void Menu::cargarObjeto(const std::string& nombre_archivo) {
     // Verificar si el archivo puede ser abierto
-   std::ifstream file;
-    file.open(nombre_archivo);
-    std::cout << nombre_archivo << std::endl;
+    std::ifstream file(nombre_archivo);
     if (!file.is_open()) {
-        std::cout << "El archivo " << nombre_archivo << " no existe o es ilegible." << std::endl;
+        std::cout << "(Archivo no existe) El archivo " << nombre_archivo << " no existe o es ilegible." << std::endl;
         return;
     }
 
@@ -194,15 +191,19 @@ void Menu::cargarObjeto(const std::string& nombre_archivo) {
     std::vector<int> x, y, z;
     std::vector<int> cj;
     std::vector<int> ij;
-
     std::string line;
 
     // Leer el nombre de la malla
     if (std::getline(file, line)) {
         nombre_objeto = line;
-        std::cout << "Nombre de la malla: " << nombre_objeto << std::endl;
     } else {
-        std::cout << "El archivo " << nombre_archivo << " no contiene un objeto 3D válido." << std::endl;
+        std::cout << "(Archivo vacío o incompleto) El archivo " << nombre_archivo << " no contiene un objeto 3D válido." << std::endl;
+        return;
+    }
+
+    // Verificar si el objeto ya está cargado
+    if (objetoCargado(nombre_objeto)) {
+        std::cout << "(Objeto ya existe) El objeto " << nombre_objeto << " ya ha sido cargado en memoria." << std::endl;
         return;
     }
 
@@ -210,7 +211,7 @@ void Menu::cargarObjeto(const std::string& nombre_archivo) {
     if (std::getline(file, line)) {
         n_vertices = std::stoi(line);
     } else {
-        std::cout << "El archivo " << nombre_archivo << " no contiene un objeto 3D válido." << std::endl;
+        std::cout << "(Archivo vacío o incompleto) El archivo " << nombre_archivo << " no contiene un objeto 3D válido." << std::endl;
         return;
     }
 
@@ -224,16 +225,13 @@ void Menu::cargarObjeto(const std::string& nombre_archivo) {
             y.push_back(yi);
             z.push_back(zi);
         } else {
-            std::cout << "El archivo " << nombre_archivo << " no contiene un objeto 3D válido." << std::endl;
+            std::cout << "(Archivo vacío o incompleto) El archivo " << nombre_archivo << " no contiene un objeto 3D válido." << std::endl;
             return;
         }
     }
 
     // Leer las caras
-    while (std::getline(file, line)) {
-        if (line == "-1") {
-            break;
-        }
+    while (std::getline(file, line) && line == "-1") {
         std::stringstream ss(line);
         int c;
         ss >> c;
@@ -248,7 +246,7 @@ void Menu::cargarObjeto(const std::string& nombre_archivo) {
     // Crear el objeto y añadirlo a la lista de objetos cargados
     Objeto objeto(nombre_objeto, n_vertices, x, y, z, cj, ij);
     objetosCargados.push_back(objeto);
-    std::cout << "El objeto " << nombre_objeto << " ha sido cargado exitosamente desde el archivo " << nombre_archivo << "." << std::endl;
+    std::cout << "(Resultado exitoso) El objeto " << nombre_objeto << " ha sido cargado exitosamente desde el archivo " << nombre_archivo << "." << std::endl;
 }
 
 // Lista los objetos cargados
