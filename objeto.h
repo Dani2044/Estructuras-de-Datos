@@ -1,3 +1,6 @@
+#ifndef __OBJETO_H__
+#define __OBJETO_H__
+
 #include <iostream>
 #include <vector>
 #include <string>
