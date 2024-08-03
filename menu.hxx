@@ -286,7 +286,7 @@ void Menu::crearCajaDeAjusteGlobal() {
 // Elimina un objeto
 void Menu::descargarObjeto(std::string& nombre_objeto) {
     auto it = std::find_if(objetosCargados.begin(), objetosCargados.end(),
-        [&nombre_objeto](const Objeto& obj) { return obj.getMeshName() == nombre_objeto; });
+        [&nombre_objeto](const Objeto& obj) { return obj.getNombreObjeto() == nombre_objeto; });
 
     if (it == objetosCargados.end()) {
         std::cout << "(Objeto no existe) El objeto " << nombre_objeto << " no ha sido cargado en memoria." << std::endl;
@@ -302,7 +302,7 @@ void Menu::descargarObjeto(std::string& nombre_objeto) {
 void Menu::guardarObjetoEnArchivo( std::string& nombre_objeto,std::string& nombre_archivo) {
     // Buscar el objeto por nombre
     std::vector<Objeto>::iterator it = std::find_if(objetosCargados.begin(), objetosCargados.end(),
-        [&nombre_objeto](const Objeto& obj) { return obj.getMeshName() == nombre_objeto; });
+        [&nombre_objeto](const Objeto& obj) { return obj.getNombreObjeto() == nombre_objeto; });
 
     if (it == objetosCargados.end()) {
         // Objeto no encontrado
@@ -319,7 +319,7 @@ void Menu::guardarObjetoEnArchivo( std::string& nombre_objeto,std::string& nombr
         return;
     }
 
-    archivo << objeto.getMeshName() << std::endl;
+    archivo << objeto.getNombreObjeto() << std::endl;
     archivo << objeto.getX().size() << std::endl;
 
     // Escribir los vértices
