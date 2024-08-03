@@ -252,11 +252,11 @@ void Menu::cargarObjeto(const std::string& nombre_archivo) {
 // Lista los objetos cargados
 void Menu::listarObjetosCargados() {
    if (objetosCargados.empty()) {
-        std::cout << "Ningún objeto ha sido cargado en memoria." << std::endl;
+        std::cout << "(Memoria vacía) Ningún objeto ha sido cargado en memoria." << std::endl;
         return;
     }
 
-    std::cout << "Hay " << objetosCargados.size() << " objetos en memoria:" << std::endl;
+    std::cout << "(Resultado exitoso) Hay " << objetosCargados.size() << " objetos en memoria:" << std::endl;
     for (const Objeto& objeto : objetosCargados) {
         std::cout << objeto.toString() << std::endl;
     }
@@ -264,49 +264,45 @@ void Menu::listarObjetosCargados() {
 
 // Crea la caja de ajuste para un objeto específico
 void Menu::crearCajaDeAjuste(std::string& nombre_objeto) {
-    /*if (!objetoCargado(nombre_objeto)) {
-        std::cout << "El objeto " << nombre_objeto << " no ha sido cargado en memoria." << std::endl;
-        return;
-    }
-
-    std::string nombreCaja = "env_" + nombre_objeto;
-    std::cout << "La caja envolvente del objeto " << nombre_objeto << " se ha generado con el nombre " << nombreCaja << " y se ha agregado a los objetos en memoria." << std::endl;*/
-}
-
-// Crea la caja de ajuste global para todos los objetos
-void Menu::crearCajaDeAjusteGlobal() {
-  /*  if (objetosCargados.empty()) {
-        std::cout << "Ningún objeto ha sido cargado en memoria." << std::endl;
-        return;
-    }
-    
-    std::cout << "La caja envolvente global se ha generado con el nombre env_global y se ha agregado a los objetos en memoria." << std::endl;*/
-}
-
-// Elimina un objeto
-void Menu::descargarObjeto(std::string& nombre_objeto) {
-    // Buscar el objeto por nombre
-  /*  auto it = std::find_if(objetosCargados.begin(), objetosCargados.end(),
-        [&nombre_objeto](const Objeto& obj) { return obj.getNombreObjeto() == nombre_objeto; });
-
-    if (it == objetosCargados.end()) {
-        // Objeto no encontrado
+    if (!objetoCargado(nombre_objeto)) {
         std::cout << "(Objeto no existe) El objeto " << nombre_objeto << " no ha sido cargado en memoria." << std::endl;
         return;
     }
 
-    // Eliminar el objeto de memoria
-    objetosCargados.erase(it);
-
-    // Mensaje de éxito
-    std::cout << "(Resultado exitoso) El objeto " << nombre_objeto << " ha sido eliminado de la memoria de trabajo." << std::endl;*/
+    std::string nombreCaja = "env_" + nombre_objeto;
+    std::cout << "(Resultado exitoso) La caja envolvente del objeto " << nombre_objeto << " se ha generado con el nombre " << nombreCaja << " y se ha agregado a los objetos en memoria." << std::endl;
 }
+
+// Crea la caja de ajuste global para todos los objetos
+void Menu::crearCajaDeAjusteGlobal() {
+    if (objetosCargados.empty()) {
+        std::cout << "(Memoria vacía) Ningún objeto ha sido cargado en memoria." << std::endl;
+        return;
+    }
+    
+    std::cout << "(Resultado exitoso) La caja envolvente global se ha generado con el nombre env_global y se ha agregado a los objetos en memoria." << std::endl;
+}
+
+// Elimina un objeto
+void Menu::descargarObjeto(std::string& nombre_objeto) {
+    auto it = std::find_if(objetosCargados.begin(), objetosCargados.end(),
+        [&nombre_objeto](const Objeto& obj) { return obj.getMeshName() == nombre_objeto; });
+
+    if (it == objetosCargados.end()) {
+        std::cout << "(Objeto no existe) El objeto " << nombre_objeto << " no ha sido cargado en memoria." << std::endl;
+        return;
+    }
+
+    objetosCargados.erase(it);
+    std::cout << "(Resultado exitoso) El objeto " << nombre_objeto << " ha sido eliminado de la memoria de trabajo." << std::endl;
+}
+
 
 // Guarda un objeto
 void Menu::guardarObjetoEnArchivo( std::string& nombre_objeto,std::string& nombre_archivo) {
     // Buscar el objeto por nombre
     std::vector<Objeto>::iterator it = std::find_if(objetosCargados.begin(), objetosCargados.end(),
-        [&nombre_objeto](const Objeto& obj) { return obj.getNombreObjeto() == nombre_objeto; });
+        [&nombre_objeto](const Objeto& obj) { return obj.getMeshName() == nombre_objeto; });
 
     if (it == objetosCargados.end()) {
         // Objeto no encontrado
@@ -323,7 +319,7 @@ void Menu::guardarObjetoEnArchivo( std::string& nombre_objeto,std::string& nombr
         return;
     }
 
-    archivo << objeto.getNombreObjeto() << std::endl;
+    archivo << objeto.getMeshName() << std::endl;
     archivo << objeto.getX().size() << std::endl;
 
     // Escribir los vértices
@@ -350,55 +346,55 @@ void Menu::guardarObjetoEnArchivo( std::string& nombre_objeto,std::string& nombr
 
 // Encuentra el vértice más cercano en un objeto específico
 void Menu::verticeCercanoObjeto(double px, double py, double pz, std::string& nombre_objeto) {
-   /* if (!objetoCargado(nombre_objeto)) {
-        std::cout << "El objeto " << nombre_objeto << " no ha sido cargado en memoria." << std::endl;
+    if (!objetoCargado(nombre_objeto)) {
+        std::cout << "(Objeto no existe) El objeto " << nombre_objeto << " no ha sido cargado en memoria." << std::endl;
         return;
     }
 
-    std::cout << "El vértice más cercano al punto (" << px << ", " << py << ", " << pz << ") es el vértice i con coordenadas (vx, vy, vz) a una distancia de valor_distancia." << std::endl;*/
+    std::cout << "(Resultado exitoso) El vértice más cercano al punto (" << px << ", " << py << ", " << pz << ") es el vértice i con coordenadas (vx, vy, vz) a una distancia de valor_distancia." << std::endl;
 }
 
 // Encuentra el vértice más cercano en todos los objetos
 void Menu::verticeCercanoTodosObjetos(double px, double py, double pz) {
-    /*if (objetosCargados.empty()) {
-        std::cout << "Ningún objeto ha sido cargado en memoria." << std::endl;
+    if (objetosCargados.empty()) {
+        std::cout << "(Memoria vacía) Ningún objeto ha sido cargado en memoria." << std::endl;
         return;
     }
 
-    std::cout << "El vértice más cercano al punto (" << px << ", " << py << ", " << pz << ") es el vértice i del objeto nombre_objeto con coordenadas (vx, vy, vz) a una distancia de valor_distancia." << std::endl;*/
+    std::cout << "(Resultado exitoso) El vértice más cercano al punto (" << px << ", " << py << ", " << pz << ") es el vértice i del objeto nombre_objeto con coordenadas (vx, vy, vz) a una distancia de valor_distancia." << std::endl;
 }
 
 // Encuentra los vértices más cercanos a las esquinas de la caja de ajuste
 void Menu::verticesCercanosCaja(std::string& nombre_objeto) {
-   /* if (!objetoCargado(nombre_objeto)) {
-        std::cout << "El objeto " << nombre_objeto << " no ha sido cargado en memoria." << std::endl;
+    if (!objetoCargado(nombre_objeto)) {
+        std::cout << "(Objeto no existe) El objeto " << nombre_objeto << " no ha sido cargado en memoria." << std::endl;
         return;
     }
 
-    std::cout << "Los vértices del objeto " << nombre_objeto << " más cercanos a las esquinas de la caja de ajuste son: vértices_x, vértices_y, vértices_z." << std::endl;*/
+    std::cout << "(Resultado exitoso) Los vértices del objeto " << nombre_objeto << " más cercanos a las esquinas de la caja de ajuste son: vértices_x, vértices_y, vértices_z." << std::endl;
 }
 
 // Encuentra la ruta más corta entre dos vértices de un objeto
 void Menu::rutaCortaVertices(int v1, int v2, std::string& nombre_objeto) {
-    /*if (!objetoCargado(nombre_objeto)) {
-        std::cout << "El objeto " << nombre_objeto << " no ha sido cargado en memoria." << std::endl;
+    if (!objetoCargado(nombre_objeto)) {
+        std::cout << "(Objeto no existe) El objeto " << nombre_objeto << " no ha sido cargado en memoria." << std::endl;
         return;
     }
 
-    std::cout << "Los indices de los vertices dados son iguales." << std::endl;
-    std::cout << "Algunos de los indices de vertices estan fuera de rango para el objeto " << nombre_objeto << std::endl;
-    std::cout << "La ruta más corta entre los vértices " << v1 << " y " << v2 << " del objeto " << nombre_objeto << " es ruta_corta." << std::endl;*/
+    std::cout << "(Índices iguales) Los indices de los vertices dados son iguales." << std::endl;
+    std::cout << "(Índices no existen) Algunos de los indices de vertices estan fuera de rango para el objeto " << nombre_objeto << std::endl;
+    std::cout << "(Resultado exitoso) La ruta más corta entre los vértices " << v1 << " y " << v2 << " del objeto " << nombre_objeto << " es ruta_corta." << std::endl;
 }
 
 // Encuentra la ruta más corta de un vértice al centro del objeto
 void Menu::rutaCortaCentro(int v1, std::string& nombre_objeto) {
-    /*if (!objetoCargado(nombre_objeto)) {
-        std::cout << "El objeto " << nombre_objeto << " no ha sido cargado en memoria." << std::endl;
+    if (!objetoCargado(nombre_objeto)) {
+        std::cout << "(Objeto no existe) El objeto " << nombre_objeto << " no ha sido cargado en memoria." << std::endl;
         return;
     }
 
-    std::cout << "El indice de vertice esta fuera de rango para el objeto nombre_objeto." << nombre_objeto << std::endl;
-    std::cout << "La ruta más corta entre el vértice " << v1 << " y el centro del objeto " << nombre_objeto << " es ruta_corta." << std::endl;*/
+    std::cout << "(Índices no existen) El indice de vertice esta fuera de rango para el objeto nombre_objeto." << nombre_objeto << std::endl;
+    std::cout << "(Resultado exitoso) La ruta más corta entre el vértice " << v1 << " y el centro del objeto " << nombre_objeto << " es ruta_corta." << std::endl;
 }
 
 #endif // __MENU__HXX__
