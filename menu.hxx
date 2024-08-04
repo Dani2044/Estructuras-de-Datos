@@ -18,12 +18,12 @@ Menu::Menu() {
 // Verifica si un objeto está cargado
 bool Menu::objetoCargado(const std::string& nombre_objeto) {
     return std::any_of(objetosCargados.begin(), objetosCargados.end(),
-        [&nombre_objeto](const Objeto& obj) { return obj.getNombreObjeto() == nombre_objeto; });
+        [&nombre_objeto](const Objeto& obj) { return obj.getMeshName() == nombre_objeto; });
 }
 
 // Muestra el menú
 void Menu::mostrarMenu() {
-    std::cout << "==========================================================================================================\n" << std::endl;
+        std::cout << "==========================================================================================================\n" << std::endl;
     std::cout << "Comandos disponibles:\n"<< std::endl<< std::endl;
     std::cout << "- cargar <nombre_archivo>: Carga una malla desde un archivo." << std::endl;
     std::cout << "- listado: Muestra los objetos cargados en memoria." << std::endl;
@@ -37,8 +37,8 @@ void Menu::mostrarMenu() {
     std::cout << "- ruta_corta <i1> <i2> <nombre_objeto>: Ruta más corta entre vértices." << std::endl;
     std::cout << "- ruta_corta_centro <i1> <nombre_objeto>: Ruta más corta al centro de un objeto." << std::endl;
     std::cout << "- salir: Termina la ejecución del programa." << std::endl;
-    std::cout << "- ayuda: Muestra esta ayuda." << std::endl << std::endl;
-    std::cout << "Para obtener más información sobre un comando específico, escriba 'ayuda' seguido del nombre del comando." << std::endl;
+    std::cout << "- ayuda: Muestra esta ayuda." << std::endl;
+    std::cout << "\nPara obtener más información sobre un comando específico, escriba 'ayuda' seguido del nombre del comando." << std::endl;
     std::cout << "Ejemplo: ayuda cargar\n" << std::endl;
     std::cout << "==========================================================================================================\n" << std::endl;
 }
@@ -53,76 +53,77 @@ void Menu::manejarEntradaUsuario() {
     std::string comando;
     std::string argumento;
     ss >> comando;
-    
     if (comando == "ayuda") {
         ss >> argumento;  // Intenta obtener un segundo argumento
         if (!argumento.empty()) {
             // Maneja la ayuda específica para cada comando
             if(argumento == "cargar"){
-                std::cout <<"--------------------------------------------------------------------------------------------\n"
-                          << "Comando: cargar <nombre_archivo>\n"
-                          << "Descripción: Carga en memoria la malla desde el archivo especificado, agregando el objeto a los gestionados por el sistema.\n"
-                          << "Ejemplo: cargar modelo.obj\n"
-                          <<"--------------------------------------------------------------------------------------------\n";
-            } else if(argumento == "listado"){
-                std::cout <<"--------------------------------------------------------------------------------------------\n"
-                          << "Comando: listado\n"
-                          << "Descripción: Muestra una lista de todos los objetos cargados en memoria, incluyendo detalles como cantidad de vértices, aristas y caras.\n"
-                          << "Ejemplo: listado\n"
-                          <<"--------------------------------------------------------------------------------------------\n";
-            } else if(argumento == "envolvente"){
-                std::cout <<"--------------------------------------------------------------------------------------------\n"
-                          << "Comando: envolvente [nombre_objeto]\n"
-                          << "Descripción: Calcula la caja envolvente para el objeto especificado o para todos los objetos si no se especifica uno.\n"
-                          << "Ejemplo: envolvente nombreFigura\n"
-                          <<"--------------------------------------------------------------------------------------------\n";
-            } else if(argumento == "descargar"){
-                std::cout <<"--------------------------------------------------------------------------------------------\n"
-                          << "Comando: descargar <nombre_objeto>\n"
-                          << "Descripción: Elimina un objeto específico de la memoria del sistema.\n"
-                          << "Ejemplo: descargar nombreFigura\n"
-                          <<"--------------------------------------------------------------------------------------------\n";
-            } else if(argumento == "guardar"){
-                std::cout <<"--------------------------------------------------------------------------------------------\n"
-                          << "Comando: guardar <nombre_objeto> <nombre_archivo>\n"
-                          << "Descripción: Guarda la malla del objeto especificado en un nuevo archivo, permitiendo la persistencia de datos.\n"
-                          << "Ejemplo: guardar nombreFigura copia_modelo.obj\n"
-                          <<"--------------------------------------------------------------------------------------------\n";
-            } else if(argumento == "v_cercano"){
-                std::cout <<"--------------------------------------------------------------------------------------------\n"
-                          << "Comando: v_cercano <px> <py> <pz> [nombre_objeto]\n"
-                          << "Descripción: Identifica el vértice más cercano al punto especificado por las coordenadas <px>, <py>, <pz>. Si se proporciona un [nombre_objeto], busca solo dentro de ese objeto. Si no se especifica un objeto, busca en todos los objetos cargados.\n"
-                          << "Ejemplo 1 (objeto específico): v_cercano 1 2 3 nombreObjeto\n"
-                          << "Ejemplo 2 (todos los objetos): v_cercano 1 2 3\n"
-                          <<"--------------------------------------------------------------------------------------------\n";
-            } else if(argumento == "v_cercanos_caja"){
+        std::cout <<"--------------------------------------------------------------------------------------------\n"
+                  << "Comando: cargar <nombre_archivo>\n"
+                  << "Descripción: Carga en memoria la malla desde el archivo especificado, agregando el objeto a los gestionados por el sistema.\n"
+                  << "Ejemplo: cargar modelo.obj\n"
+                  <<"--------------------------------------------------------------------------------------------\n";
+    } else if(argumento == "listado"){
+        std::cout <<"--------------------------------------------------------------------------------------------\n"
+                  << "Comando: listado\n"
+                  << "Descripción: Muestra una lista de todos los objetos cargados en memoria, incluyendo detalles como cantidad de vértices, aristas y caras.\n"
+                  << "Ejemplo: listado\n"
+                  <<"--------------------------------------------------------------------------------------------\n";
+    } else if(argumento == "envolvente"){
+        std::cout <<"--------------------------------------------------------------------------------------------\n"
+                  << "Comando: envolvente [nombre_objeto]\n"
+                  << "Descripción: Calcula la caja envolvente para el objeto especificado o para todos los objetos si no se especifica uno.\n"
+                  << "Ejemplo: envolvente nombreFigura\n"
+                  <<"--------------------------------------------------------------------------------------------\n";
+    } else if(argumento == "descargar"){
+        std::cout <<"--------------------------------------------------------------------------------------------\n"
+                  << "Comando: descargar <nombre_objeto>\n"
+                  << "Descripción: Elimina un objeto específico de la memoria del sistema.\n"
+                  << "Ejemplo: descargar nombreFigura\n"
+                  <<"--------------------------------------------------------------------------------------------\n";
+    } else if(argumento == "guardar"){
+        std::cout <<"--------------------------------------------------------------------------------------------\n"
+                  << "Comando: guardar <nombre_objeto> <nombre_archivo>\n"
+                  << "Descripción: Guarda la malla del objeto especificado en un nuevo archivo, permitiendo la persistencia de datos.\n"
+                  << "Ejemplo: guardar nombreFigura copia_modelo.obj\n"
+                  <<"--------------------------------------------------------------------------------------------\n";
+    } else if(argumento == "v_cercano"){
+        std::cout <<"--------------------------------------------------------------------------------------------\n"
+                  << "Comando: v_cercano <px> <py> <pz> [nombre_objeto]\n"
+                  << "Descripción: Identifica el vértice más cercano al punto especificado por las coordenadas <px>, <py>, <pz>. Si se proporciona un [nombre_objeto], busca solo dentro de ese objeto. Si no se especifica un objeto, busca en todos los objetos cargados.\n"
+                  << "Ejemplo 1 (objeto específico): v_cercano 1 2 3 nombreObjeto\n"
+                  << "Ejemplo 2 (todos los objetos): v_cercano 1 2 3\n"
+                  <<"--------------------------------------------------------------------------------------------\n";
+    } else if(argumento == "v_cercanos_caja"){
                 std::cout << "--------------------------------------------------------------------------------------------\n"
                           << "Comando: v_cercanos_caja <nombre_objeto>\n"
                           << "Descripción: Identifica los vértices del objeto nombre_objeto más cercanos a las esquinas de su caja envolvente.\n"
                           << "Ejemplo: v_cercanos_caja nombreFigura\n"
                           << "--------------------------------------------------------------------------------------------\n";
-            } else if(argumento == "ruta_corta"){
-                std::cout <<"--------------------------------------------------------------------------------------------\n"
-                          << "Comando: ruta_corta <i1> <i2> <nombre_objeto>\n"
-                          << "Descripción: Calcula la ruta más corta entre dos vértices de un objeto especificado, basada en la distancia euclidiana.\n"
-                          << "Ejemplo: ruta_corta 0 5 nombreObjeto\n"
-                          <<"--------------------------------------------------------------------------------------------\n";
-            } else if(argumento == "ruta_corta_centro"){
-                std::cout <<"--------------------------------------------------------------------------------------------\n"
-                          << "Comando: ruta_corta_centro <i1> <nombre_objeto>\n"
-                          << "Descripción: Determina la ruta más corta desde un vértice hasta el centroide del objeto especificado.\n"
-                          << "Ejemplo: ruta_corta_centro 2 nombreObjeto\n"
-                          <<"--------------------------------------------------------------------------------------------\n";
+    } else if(argumento == "ruta_corta"){
+        std::cout <<"--------------------------------------------------------------------------------------------\n"
+                  << "Comando: ruta_corta <i1> <i2> <nombre_objeto>\n"
+                  << "Descripción: Calcula la ruta más corta entre dos vértices de un objeto especificado, basada en la distancia euclidiana.\n"
+                  << "Ejemplo: ruta_corta 0 5 nombreObjeto\n"
+                  <<"--------------------------------------------------------------------------------------------\n";
+    } else if(argumento == "ruta_corta_centro"){
+        std::cout <<"--------------------------------------------------------------------------------------------\n"
+                  << "Comando: ruta_corta_centro <i1> <nombre_objeto>\n"
+                  << "Descripción: Determina la ruta más corta desde un vértice hasta el centroide del objeto especificado.\n"
+                  << "Ejemplo: ruta_corta_centro 2 nombreObjeto\n"
+                  <<"--------------------------------------------------------------------------------------------\n";
             } else {
                 std::cout << "Ayuda para el comando especificado no disponible. Intente 'ayuda' para ver todos los comandos.\n";
             }
         } else {
             // No hay segundo argumento, muestra el menú general de ayuda
             mostrarMenu();
-        }        
-    }  else if (comando == "cargar") { 
+        }
+    
+}  else if (comando == "cargar") { 
         std::string nombre_archivo;
-        ss >> nombre_archivo;        
+        ss >> nombre_archivo;
+        
         cargarObjeto(nombre_archivo);
     } else if (comando == "listado") {
         listarObjetosCargados();
@@ -140,7 +141,7 @@ void Menu::manejarEntradaUsuario() {
     } else if (comando == "guardar") {
         std::string nombre_objeto, nombre_archivo;
         ss >> nombre_objeto >> nombre_archivo;
-        guardarObjetoEnArchivo(nombre_objeto, nombre_archivo);
+            guardarObjetoEnArchivo(nombre_objeto, nombre_archivo);
     } else if (comando == "v_cercano") {
         double px, py, pz;
         ss >> px >> py >> pz;
@@ -165,8 +166,8 @@ void Menu::manejarEntradaUsuario() {
         ss >> i1 >> nombre_objeto;
         rutaCortaCentro(i1, nombre_objeto);
     } else if (comando == "salir") {
-        salirPrograma();  
-    } else {
+        salirPrograma();
+    }else {
         std::cout << "Opción no válida." << std::endl;
     }
 }
@@ -177,7 +178,7 @@ void Menu::salirPrograma() {
     exit(0);
 }
 
-// Carga un objeto
+//Cargar objeto
 void Menu::cargarObjeto(const std::string& nombre_archivo) {
     // Verificar si el archivo puede ser abierto
     std::ifstream file(nombre_archivo);
@@ -186,24 +187,25 @@ void Menu::cargarObjeto(const std::string& nombre_archivo) {
         return;
     }
 
-    std::string nombre_objeto;
+    std::string mesh_name;
     int n_vertices;
     std::vector<int> x, y, z;
     std::vector<int> cj;
     std::vector<int> ij;
+
     std::string line;
 
     // Leer el nombre de la malla
     if (std::getline(file, line)) {
-        nombre_objeto = line;
+        mesh_name = line;
     } else {
         std::cout << "(Archivo vacío o incompleto) El archivo " << nombre_archivo << " no contiene un objeto 3D válido." << std::endl;
         return;
     }
 
     // Verificar si el objeto ya está cargado
-    if (objetoCargado(nombre_objeto)) {
-        std::cout << "(Objeto ya existe) El objeto " << nombre_objeto << " ya ha sido cargado en memoria." << std::endl;
+    if (objetoCargado(mesh_name)) {
+        std::cout << "(Objeto ya existe) El objeto " << mesh_name << " ya ha sido cargado en memoria." << std::endl;
         return;
     }
 
@@ -231,7 +233,10 @@ void Menu::cargarObjeto(const std::string& nombre_archivo) {
     }
 
     // Leer las caras
-    while (std::getline(file, line) && line == "-1") {
+    while (std::getline(file, line)) {
+        if (line == "-1") {
+            break;
+        }
         std::stringstream ss(line);
         int c;
         ss >> c;
@@ -244,19 +249,19 @@ void Menu::cargarObjeto(const std::string& nombre_archivo) {
     }
 
     // Crear el objeto y añadirlo a la lista de objetos cargados
-    Objeto objeto(nombre_objeto, n_vertices, x, y, z, cj, ij);
+    Objeto objeto(mesh_name, n_vertices, x, y, z, cj, ij);
     objetosCargados.push_back(objeto);
-    std::cout << "(Resultado exitoso) El objeto " << nombre_objeto << " ha sido cargado exitosamente desde el archivo " << nombre_archivo << "." << std::endl;
+    std::cout << "(Resultado exitoso) El objeto " << mesh_name << " ha sido cargado exitosamente desde el archivo " << nombre_archivo << "." << std::endl;
 }
 
 // Lista los objetos cargados
 void Menu::listarObjetosCargados() {
    if (objetosCargados.empty()) {
-        std::cout << "(Memoria vacía) Ningún objeto ha sido cargado en memoria." << std::endl;
+        std::cout << "Ningún objeto ha sido cargado en memoria." << std::endl;
         return;
     }
 
-    std::cout << "(Resultado exitoso) Hay " << objetosCargados.size() << " objetos en memoria:" << std::endl;
+    std::cout << "Hay " << objetosCargados.size() << " objetos en memoria:" << std::endl;
     for (const Objeto& objeto : objetosCargados) {
         std::cout << objeto.toString() << std::endl;
     }
@@ -286,7 +291,7 @@ void Menu::crearCajaDeAjusteGlobal() {
 // Elimina un objeto
 void Menu::descargarObjeto(std::string& nombre_objeto) {
     auto it = std::find_if(objetosCargados.begin(), objetosCargados.end(),
-        [&nombre_objeto](const Objeto& obj) { return obj.getNombreObjeto() == nombre_objeto; });
+        [&nombre_objeto](const Objeto& obj) { return obj.getMeshName() == nombre_objeto; });
 
     if (it == objetosCargados.end()) {
         std::cout << "(Objeto no existe) El objeto " << nombre_objeto << " no ha sido cargado en memoria." << std::endl;
@@ -302,7 +307,7 @@ void Menu::descargarObjeto(std::string& nombre_objeto) {
 void Menu::guardarObjetoEnArchivo( std::string& nombre_objeto,std::string& nombre_archivo) {
     // Buscar el objeto por nombre
     std::vector<Objeto>::iterator it = std::find_if(objetosCargados.begin(), objetosCargados.end(),
-        [&nombre_objeto](const Objeto& obj) { return obj.getNombreObjeto() == nombre_objeto; });
+        [&nombre_objeto](const Objeto& obj) { return obj.getMeshName() == nombre_objeto; });
 
     if (it == objetosCargados.end()) {
         // Objeto no encontrado
@@ -319,7 +324,7 @@ void Menu::guardarObjetoEnArchivo( std::string& nombre_objeto,std::string& nombr
         return;
     }
 
-    archivo << objeto.getNombreObjeto() << std::endl;
+    archivo << objeto.getMeshName() << std::endl;
     archivo << objeto.getX().size() << std::endl;
 
     // Escribir los vértices
@@ -347,54 +352,54 @@ void Menu::guardarObjetoEnArchivo( std::string& nombre_objeto,std::string& nombr
 // Encuentra el vértice más cercano en un objeto específico
 void Menu::verticeCercanoObjeto(double px, double py, double pz, std::string& nombre_objeto) {
     if (!objetoCargado(nombre_objeto)) {
-        std::cout << "(Objeto no existe) El objeto " << nombre_objeto << " no ha sido cargado en memoria." << std::endl;
+        std::cout << "El objeto " << nombre_objeto << " no ha sido cargado en memoria." << std::endl;
         return;
     }
 
-    std::cout << "(Resultado exitoso) El vértice más cercano al punto (" << px << ", " << py << ", " << pz << ") es el vértice i con coordenadas (vx, vy, vz) a una distancia de valor_distancia." << std::endl;
+    std::cout << "El vértice más cercano al punto (" << px << ", " << py << ", " << pz << ") es el vértice i con coordenadas (vx, vy, vz) a una distancia de valor_distancia." << std::endl;
 }
 
 // Encuentra el vértice más cercano en todos los objetos
 void Menu::verticeCercanoTodosObjetos(double px, double py, double pz) {
     if (objetosCargados.empty()) {
-        std::cout << "(Memoria vacía) Ningún objeto ha sido cargado en memoria." << std::endl;
+        std::cout << "Ningún objeto ha sido cargado en memoria." << std::endl;
         return;
     }
 
-    std::cout << "(Resultado exitoso) El vértice más cercano al punto (" << px << ", " << py << ", " << pz << ") es el vértice i del objeto nombre_objeto con coordenadas (vx, vy, vz) a una distancia de valor_distancia." << std::endl;
+    std::cout << "El vértice más cercano al punto (" << px << ", " << py << ", " << pz << ") es el vértice i del objeto nombre_objeto con coordenadas (vx, vy, vz) a una distancia de valor_distancia." << std::endl;
 }
 
 // Encuentra los vértices más cercanos a las esquinas de la caja de ajuste
 void Menu::verticesCercanosCaja(std::string& nombre_objeto) {
     if (!objetoCargado(nombre_objeto)) {
-        std::cout << "(Objeto no existe) El objeto " << nombre_objeto << " no ha sido cargado en memoria." << std::endl;
+        std::cout << "El objeto " << nombre_objeto << " no ha sido cargado en memoria." << std::endl;
         return;
     }
 
-    std::cout << "(Resultado exitoso) Los vértices del objeto " << nombre_objeto << " más cercanos a las esquinas de la caja de ajuste son: vértices_x, vértices_y, vértices_z." << std::endl;
+    std::cout << "Los vértices del objeto " << nombre_objeto << " más cercanos a las esquinas de la caja de ajuste son: vértices_x, vértices_y, vértices_z." << std::endl;
 }
 
 // Encuentra la ruta más corta entre dos vértices de un objeto
 void Menu::rutaCortaVertices(int v1, int v2, std::string& nombre_objeto) {
     if (!objetoCargado(nombre_objeto)) {
-        std::cout << "(Objeto no existe) El objeto " << nombre_objeto << " no ha sido cargado en memoria." << std::endl;
+        std::cout << "El objeto " << nombre_objeto << " no ha sido cargado en memoria." << std::endl;
         return;
     }
 
-    std::cout << "(Índices iguales) Los indices de los vertices dados son iguales." << std::endl;
-    std::cout << "(Índices no existen) Algunos de los indices de vertices estan fuera de rango para el objeto " << nombre_objeto << std::endl;
-    std::cout << "(Resultado exitoso) La ruta más corta entre los vértices " << v1 << " y " << v2 << " del objeto " << nombre_objeto << " es ruta_corta." << std::endl;
+    std::cout << "Los indices de los vertices dados son iguales." << std::endl;
+    std::cout << "Algunos de los indices de vertices estan fuera de rango para el objeto " << nombre_objeto << std::endl;
+    std::cout << "La ruta más corta entre los vértices " << v1 << " y " << v2 << " del objeto " << nombre_objeto << " es ruta_corta." << std::endl;
 }
 
 // Encuentra la ruta más corta de un vértice al centro del objeto
 void Menu::rutaCortaCentro(int v1, std::string& nombre_objeto) {
     if (!objetoCargado(nombre_objeto)) {
-        std::cout << "(Objeto no existe) El objeto " << nombre_objeto << " no ha sido cargado en memoria." << std::endl;
+        std::cout << "El objeto " << nombre_objeto << " no ha sido cargado en memoria." << std::endl;
         return;
     }
 
-    std::cout << "(Índices no existen) El indice de vertice esta fuera de rango para el objeto nombre_objeto." << nombre_objeto << std::endl;
-    std::cout << "(Resultado exitoso) La ruta más corta entre el vértice " << v1 << " y el centro del objeto " << nombre_objeto << " es ruta_corta." << std::endl;
+    std::cout << "El indice de vertice esta fuera de rango para el objeto nombre_objeto." << nombre_objeto << std::endl;
+    std::cout << "La ruta más corta entre el vértice " << v1 << " y el centro del objeto " << nombre_objeto << " es ruta_corta." << std::endl;
 }
 
 #endif // __MENU__HXX__
