@@ -10,7 +10,7 @@
 // Constructor
 Menu::Menu() {
     objetosCargados.clear();
-    std::cout <<"--------------------------------------------------------------------------------------------\n"
+    std::cout <<"--------------------------------------------------------------------------------------------\n";
     std::cout << "Bienvenido al sistema de gestión de objetos." << std::endl;
     std::cout << "Para obtener información general sobre los comandos posibles, escriba 'ayuda'." << std::endl;
 }
