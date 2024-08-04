@@ -1,7 +1,7 @@
 #ifndef __MENU_H__
 #define __MENU_H__
 
-#include "objeto.hxx"
+#include "objeto.h"
 #include <iostream>
 #include <string>
 #include <vector>
