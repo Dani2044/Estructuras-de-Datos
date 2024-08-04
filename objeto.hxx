@@ -1,5 +1,5 @@
-#ifndef __OBJETO_H__
-#define __OBJETO_H__
+#ifndef __OBJETO_HXX__
+#define __OBJETO_HXX__
 
 #include <iostream>
 #include <vector>
@@ -53,6 +53,6 @@ public:
     }
 };
 
-#endif // __OBJETO_H__
+#endif // __OBJETO_HXX__
 
-// eof - objeto.h
+// eof - objeto.hxx
