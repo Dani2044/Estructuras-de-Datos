@@ -1,8 +1,7 @@
 #ifndef __MENU_H__
 #define __MENU_H__
 
-#include "objeto.h"
-#include "envoltorio.h"
+#include "objeto.hxx"
 #include <iostream>
 #include <string>
 #include <vector>
@@ -14,7 +13,7 @@ private:
     std::vector<Envoltorio> envoltoriosCargados;
 public:
     Menu(); // Constructor
-    bool objetoCargado(const std::string& nombre_objeto); // Verifica si un objeto está cargado
+    bool objetoCargado(const std::string& nombre_archivo); // Verifica si un objeto está cargado
     void mostrarMenu(); // Muestra el menú
     void manejarEntradaUsuario(); // Maneja la entrada del usuario
     void salirPrograma(); // Salir del programa
