@@ -1,7 +1,7 @@
 #ifndef __MENU_H__
 #define __MENU_H__
 
-#include "objeto.h"
+#include "objeto.hxx"
 #include <iostream>
 #include <string>
 #include <vector>
@@ -10,7 +10,7 @@ class Menu {
 private:
     std::vector<Objeto> objetosCargados; // Vector para almacenar los nombres de los objetos cargados, en lugar de string debe ser de tipo Objeto cuando hagamos la estructura correspondiente.
     // Se elige un vector para facilitar el acceso aleatorio y porque solo se agregarán objetos al final del vector
-    std::vector<Envoltorio> envoltoriosCargados;
+    // std::vector<Envoltorio> envoltoriosCargados;
 public:
     Menu(); // Constructor
     bool objetoCargado(const std::string& nombre_archivo); // Verifica si un objeto está cargado
