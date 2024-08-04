@@ -1,6 +1,3 @@
-// g++ -o programa main.cpp 
-// ./programa
-
 #include "menu.h"
 
 int main() {
