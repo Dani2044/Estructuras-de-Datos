@@ -6,7 +6,7 @@
 #include <string>
 #include <sstream>
 
-// No se realiza objeto .hxx porque la implementación es muy sencilla
+// No se realiza objeto.hxx porque la implementación es muy sencilla
 class Objeto {
 private:
     std::string nombre_objeto;
