@@ -14,7 +14,7 @@ private:
     std::vector<Envoltorio> envoltoriosCargados;
 public:
     Menu(); // Constructor
-    bool objetoCargado(std::string& nombre_objeto); // Verifica si un objeto está cargado
+    bool objetoCargado(const std::string& nombre_objeto); // Verifica si un objeto está cargado
     void mostrarMenu(); // Muestra el menú
     void manejarEntradaUsuario(); // Maneja la entrada del usuario
     void salirPrograma(); // Salir del programa
