@@ -6,7 +6,7 @@
 ## Autores
 
 - Daniel Felipe Castro Moreno
-- Victoria Sepúlveda Acero
+- Jazlyn Victoria Acero Sepúlveda
 - Juan Rozo Tarache
 
 ## Descripción
