@@ -3,29 +3,19 @@
 
 class Vertice {
 private:
-    double x, y, z; // Coordenadas del vértice
+    double x, y, z;
 
 public:
-    // Constructor por defecto
     Vertice();
-
-    // Constructor con parámetros
     Vertice(double x, double y, double z);
 
-    // Getters
     double getX() const;
     double getY() const;
     double getZ() const;
-
-    // Setters
     void setX(double x);
     void setY(double y);
     void setZ(double z);
-
-    // Método para calcular la distancia al vértice dado
     double distancia(const Vertice& otro) const;
-
-    // Sobrecarga del operador ==
     bool operator==(const Vertice& otro) const;
 };
 

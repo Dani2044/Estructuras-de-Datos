@@ -9,24 +9,16 @@ private:
     std::vector<Vertice> vertices;  // Almacena directamente objetos Vertice
 
 public:
-    // Constructor por defecto
     Cara();
-
-    // Constructor con parámetros
     Cara(const std::vector<Vertice>& vertices);
 
-    // Getters
-    const std::vector<Vertice>& getVertices() const; // Cambiado a referencia constante
+    const std::vector<Vertice>& getVertices() const;
     int getNumeroVertices() const;
-
-    // Setters
     void setVertices(const std::vector<Vertice>& vertices);
-
-    // Método para calcular el área de la cara
     double calcularArea() const;
-
-    // Método para agregar un vértice
     void agregarVertice(const Vertice& vertice);
 };
 
 #endif // __CARA_H__
+
+// eof - cara.h

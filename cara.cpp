@@ -26,13 +26,11 @@ void Cara::setVertices(const std::vector<Vertice>& vertices) {
 double Cara::calcularArea() const {
     int numVertices = vertices.size();
     if (numVertices < 3) {
-        // Un polígono debe tener al menos 3 vértices
         exit(-1);
     }
 
     double area = 0.0;
-
-    // Fórmula de Gauss para el área del polígono
+    
     for (int i = 0; i < numVertices; ++i) {
         int j = (i + 1) % numVertices;
         area += vertices[i].getX() * vertices[j].getY();

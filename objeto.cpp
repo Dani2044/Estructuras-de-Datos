@@ -1,6 +1,7 @@
 #include "objeto.h"
 #include <sstream>
 #include <limits>
+#include <vector>
 
 // Constructor por defecto
 Objeto::Objeto() {}
@@ -54,11 +55,55 @@ void Objeto::calcularCajaEnvolvente(double& xmin, double& ymin, double& zmin, do
 
 // Método para obtener una representación en cadena
 std::string Objeto::toString() const {
-    std::ostringstream oss;
-    oss << "Nombre: " << nombre << "\n";
-    oss << "Número de caras: " << caras.size() << "\n";
-    for (const Cara& cara : caras) {
-        oss << "Cara con " << cara.getNumeroVertices() << " vértices\n";
+    std::ostringstream flujo;
+    std::vector<Vertice> vertices_unicos;
+    int num_aristas = 0;
+
+    for (int i = 0; i < caras.size(); ++i) {
+        const std::vector<Vertice>& vertices_cara = caras[i].getVertices();
+        for (int j = 0; j < vertices_cara.size(); ++j) {
+            bool vertice_unico = true;
+            for (int k = 0; k < vertices_unicos.size(); ++k) {
+                if (vertices_unicos[k] == vertices_cara[j]) {
+                    vertice_unico = false;
+                    break;
+                }
+            }
+            
+            if (vertice_unico) {
+                vertices_unicos.push_back(vertices_cara[j]);
+            }
+
+            Vertice vertice_actual = vertices_cara[j];
+            Vertice vertice_siguiente = vertices_cara[(j + 1) % vertices_cara.size()];
+            bool arista_duplicada = false;
+
+            for (int m = 0; m < i; ++m) {
+                const std::vector<Vertice>& vertices_cara_anterior = caras[m].getVertices();
+                for (int n = 0; n < vertices_cara_anterior.size(); ++n) {
+                    Vertice v1_anterior = vertices_cara_anterior[n];
+                    Vertice v2_anterior = vertices_cara_anterior[(n + 1) % vertices_cara_anterior.size()];
+
+                    if ((vertice_actual == v1_anterior && vertice_siguiente == v2_anterior) ||
+                        (vertice_actual == v2_anterior && vertice_siguiente == v1_anterior)) {
+                        arista_duplicada = true;
+                        break;
+                    }
+                }
+                
+                if (arista_duplicada) {
+                    break;
+                }
+            }
+
+            if (!arista_duplicada) {
+                num_aristas++;
+            }
+        }
     }
-    return oss.str();
+
+    flujo << nombre << " contiene " << vertices_unicos.size() << " vertices, "
+          << num_aristas << " aristas y " << caras.size() << " caras.";
+
+    return flujo.str();
 }
