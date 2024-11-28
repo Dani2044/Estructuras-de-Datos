@@ -1,0 +1,27 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "C++ Debug (g++)",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/project/build/program",  // Apunta al ejecutable que se genera en el directorio build
+            "args": [],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}/project",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "miDebuggerPath": "C:/msys64/usr/bin/gdb.exe",  // Asegúrate de que esta ruta es correcta para tu sistema
+            "setupCommands": [
+                {
+                    "description": "Habilitar el formato de impresión predeterminado para gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                }
+            ],
+            "preLaunchTask": "Build Project",  // Nombre de la tarea pre-lanzamiento
+            "internalConsoleOptions": "openOnSessionStart"
+        }
+    ]
+}
