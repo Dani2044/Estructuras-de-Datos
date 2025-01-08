@@ -1,6 +1,6 @@
 // Implementación de manejo de entrada del usuario y opciones de ayuda
 
-#include "menu.h"
+#include "../include/menu.h"
 #include <chrono>
 #include <limits>
 

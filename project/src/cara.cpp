@@ -4,8 +4,8 @@
 #include <string>
 #include <vector>
 #include <limits>
-#include "vertice.h"
-#include "cara.h"
+#include "../include/vertice.h"
+#include "../include/cara.h"
 
 class Objeto {
 private:

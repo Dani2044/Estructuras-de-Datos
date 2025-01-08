@@ -1,4 +1,4 @@
-#include "objeto.h"
+#include "../include/objeto.h"
 #include <sstream>
 #include <limits>
 

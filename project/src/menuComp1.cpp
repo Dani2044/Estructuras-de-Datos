@@ -1,6 +1,6 @@
 // Implementación de operaciones básicas
 
-#include "menu.h"
+#include "../include/menu.h"
 
 // Verificar si un objeto se encuentra cargado en memoria
 bool Menu::objetoCargado(const std::string& nombre_objeto) {
@@ -32,7 +32,7 @@ void Menu::trim(std::string &s) {
 
 // Cargar objeto en memoria
 void Menu::cargarObjeto(const std::string& nombre_archivo) {
-    std::ifstream file(nombre_archivo);
+    std::ifstream file(nombre_archivo); // Cambiar aquí
     if (!file.is_open()) {
         std::cout << "(Archivo no existe) El archivo " << nombre_archivo << " no existe o es ilegible." << std::endl;
         return;

@@ -1,5 +1,5 @@
-#include "menu.h"
-#include "Grafo.h"
+#include "../include/menu.h"
+#include "../include/Grafo.h"
 #include <iostream>
 #include <vector>
 #include <limits>

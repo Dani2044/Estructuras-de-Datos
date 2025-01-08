@@ -1,4 +1,4 @@
-#include "NodoKDTree.h"
+#include "../include/NodoKDTree.h"
 #include <algorithm>
 
 // Constructor por defecto

@@ -1,7 +1,7 @@
 // Implementación de operaciones relacionadas con vértices más cercanos 
 
-#include "menu.h"
-#include "KDTree.h"
+#include "../include/menu.h"
+#include "../include/KDTree.h"
 #include <sstream>
 #include <iomanip> 
 

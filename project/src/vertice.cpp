@@ -1,4 +1,4 @@
-#include "vertice.h"
+#include "../include/vertice.h"
 #include <cmath>
 
 // Constructor por defecto
